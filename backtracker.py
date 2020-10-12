@@ -1,17 +1,26 @@
-row = [0]*9
-board = [row] * 9
+empty_board = [[0] * 9] * 9
 
 def display(board):
+    # Prints out sudoku board with dividers
     for i in range(len(board)):
-        if i % 3 == 0 and i != 0:
-            print("---" * 7)
+        if i % 3 == 0 and i != 0:    
+            print("---" * 7)                # Separates rows of board with a horizontal divider
+
         for j in range(len(board[i])):
-            if j % 3 == 0 and j != 0:
-                print("|", end = " ")
-            print(board[i][j], end = " ")
+            if j % 3 == 0 and j != 0:       
+                print("|", end = " ")       # Separates every three columns with a vertical divider
+            print(board[i][j], end = " ")   # Displays every number in each row
+        
         print()
 
     return None
+
+def find_empty(board):
+    
+
+
+
+
 
 easy_board = [
     [2,6,0,0,0,3,0,1,5],
