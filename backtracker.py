@@ -15,8 +15,61 @@ def display(board):
 
     return None
 
-def find_empty(board):
+def find_empty_cell(board):
+    # Takes sudoku board and returns first empty cell
+    for i in range(len(board)):
+        for j in range(len(board[i])):
+            if board[i][j] == 0:
+                return (i, j)
+    return None
+
+
+def simple_solve(board):
+    empty_cell = find_empty_cell(board)
+    if empty_cell:
+        row, col = empty_cell
+        for i in range(1,10):
+            board[row][col] = i
+            if validate(board):
+                if simple_solve(board):
+                    return simple_solve(board)
+
+    else:
+        print("Done! No empty cells")
+        return True
+
+def validate(board):
+
+    # Check all rows for nonzero duplicates
+    for row in board:
+        row_nonzero = [digit for digit in row if digit != 0]
+        if len(row_nonzero) != len(set(row_nonzero)):
+            return False
     
+    # Check all columns for nonzero duplicates
+    for i in range(len(board)):
+        column_digits = []
+        for j in range(len(board[i])):
+            column_digits += [board[j][i]]
+        column_nonzero = [digit for digit in column_digits if digit != 0]
+        if len(column_nonzero) != len(set(column_nonzero)):
+            return False
+    
+    # Check all boxes for nonzero duplicates
+    for box_i in range(2):
+        for box_j in range(2):
+            box_digits = []
+            for i in range(len(board)):
+                for j in range(len(board[i])):
+                    if i // 3 == box_i and j // 3 == box_j:
+                        box_digits += [board[i][j]]
+                        box_nonzero = [digit for digit in box_digits if digit != 0]
+                        if len(box_nonzero) != len(set(box_nonzero)):
+                            return False
+    
+    return True
+
+
 
 
 
@@ -58,4 +111,11 @@ hard_board = [
     [1,0,9,6,0,0,0,0,4],
 ]
 
-display(hard_board)
+def solution(board):
+    display(board)
+    simple_solve(board)
+    print('-' * 10, "Complete", '-' * 10)
+    display(board)
+    return None
+
+solution(easy_board)
