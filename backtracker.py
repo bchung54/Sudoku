@@ -1,3 +1,6 @@
+
+import time
+
 empty_board = [[0] * 9] * 9
 
 def display(board):
@@ -32,7 +35,9 @@ def simple_solve(board):
             board[row][col] = i
             if validate(board):
                 if simple_solve(board):
-                    return simple_solve(board)
+                    return True
+            else:
+                board[row][col] = 0
 
     else:
         print("Done! No empty cells")
@@ -113,9 +118,12 @@ hard_board = [
 
 def solution(board):
     display(board)
+    start = time.time()
     simple_solve(board)
-    print('-' * 10, "Complete", '-' * 10)
+    end = time.time()
+    print('-' * 10, "Complete: ", end - start, " seconds",'-' * 10)
     display(board)
     return None
 
-solution(easy_board)
+
+solution(hard_board)
