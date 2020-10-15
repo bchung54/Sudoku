@@ -39,9 +39,9 @@ def simple_solve(board):
                 
                 if simple_solve(board):
                     return True
+
                 
                 board[row][col] = 0
-                
 
     else:
         print("Done! No empty cells")
@@ -174,3 +174,4 @@ def solution(board):
     return None
 
 solution(cornell_board)
+
