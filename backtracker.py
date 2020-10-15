@@ -152,6 +152,18 @@ expert_board = [
     [9,0,0,0,7,0,0,0,0],
 ]
 
+cornell_board = [
+    [0,0,6,0,0,8,5,0,0],
+    [0,0,0,0,7,0,6,1,3],
+    [0,0,0,0,0,0,0,0,9],
+    [0,0,0,0,9,0,0,0,1],
+    [0,0,1,0,0,0,8,0,0],
+    [4,0,0,5,3,0,0,0,0],
+    [1,0,7,0,5,3,0,0,0],
+    [0,5,0,0,6,4,0,0,0],
+    [3,0,0,1,0,0,0,6,0],
+]
+
 def solution(board):
     display(board)
     start = time.time()
@@ -161,4 +173,4 @@ def solution(board):
     display(board)
     return None
 
-solution(hard_board)
+solution(cornell_board)
