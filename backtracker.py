@@ -27,16 +27,42 @@ def find_empty_cell(board):
 def simple_solve(board):
     empty_cell = find_empty_cell(board)
     if empty_cell:
-        row, col = empty_cell
         for i in range(1,10):
-            board[row][col] = i
-            if validate(board):
+            if valid(board, i, empty_cell):
+
+                row, col = empty_cell
+                
+                board[row][col] = i
+                
                 if simple_solve(board):
-                    return simple_solve(board)
+                    return True
+                
+                board[row][col] = 0
+                
 
     else:
         print("Done! No empty cells")
         return True
+
+def valid(board, digit, position):
+    row, col = position
+    for element in board[row]:
+        if digit == element:
+            return False
+    
+    for row_i in range(len(board)):
+        if digit == board[row_i][col]:
+            return False
+    
+    box_i = row // 3
+    box_j = col // 3
+
+    for i in range(box_i * 3, box_i * 3 + 3):
+        for j in range(box_j * 3, box_j * 3 + 3):
+            if digit == board[i][j]:
+                return False
+    
+    return True
 
 def validate(board):
 
@@ -111,6 +137,18 @@ hard_board = [
     [1,0,9,6,0,0,0,0,4],
 ]
 
+expert_board = [
+    [0,7,0,1,0,0,0,4,0],
+    [8,0,0,9,0,0,2,0,0],
+    [5,0,0,0,0,8,0,0,0],
+    [1,0,0,0,0,0,0,0,3],
+    [0,0,6,0,0,0,0,0,0],
+    [0,0,4,3,5,0,0,6,9],
+    [0,0,0,0,6,0,3,0,0],
+    [0,6,0,0,8,0,4,0,0],
+    [9,0,0,0,7,0,0,0,0],
+]
+
 def solution(board):
     display(board)
     simple_solve(board)
@@ -118,4 +156,4 @@ def solution(board):
     display(board)
     return None
 
-solution(easy_board)
+solution(expert_board)
