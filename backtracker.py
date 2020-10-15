@@ -1,3 +1,6 @@
+
+import time
+
 empty_board = [[0] * 9] * 9
 
 def display(board):
@@ -151,9 +154,11 @@ expert_board = [
 
 def solution(board):
     display(board)
+    start = time.time()
     simple_solve(board)
-    print('-' * 10, "Complete", '-' * 10)
+    end = time.time()
+    print('-' * 10, "Complete: ", end - start, " seconds", '-' * 10)
     display(board)
     return None
 
-solution(expert_board)
+solution(hard_board)
